@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import LoginForm from "../components/Login/LoginForm";
 import Card from "../components/UI/Card";
-import { getAuthentication} from "../actions/authAction"
+
+import AuthContext from "../context/auth-context";
+
 
 const mapStateToProps = (state) => {
     return{
@@ -12,25 +14,13 @@ const mapStateToProps = (state) => {
     };
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getAuthentication : (userData) =>  dispatch(getAuthentication(userData))
-    }
-}
 
 class LoginPage extends Component{
 
-
-    componentDidUpdate(prevProps,prevState){
-        if(prevProps.AuthMessage !== this.props.AuthMessage){
-            if(this.props.isAuth){
-                this.props.history.push("/dashboard");
-            }
-        }
-    }
+    static contextType = AuthContext;
 
     submitLoginHandler(data){
-        this.props.getAuthentication(data);
+        this.context.loginHandler(data);
     }
 
     render(){
@@ -47,4 +37,4 @@ class LoginPage extends Component{
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(LoginPage));
+export default connect(mapStateToProps)(withRouter(LoginPage));
