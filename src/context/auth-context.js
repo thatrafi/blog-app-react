@@ -33,8 +33,8 @@ class AuthContextProvider extends React.Component{
     constructor(){
         super()
         this.state = {
-            isLoggedIn : false,
-            isLogin : false
+            isLoggedIn : false, // flag to determine if user already validate and approve
+            isLogin : false // redirect to dashboard
         }
     }
 
@@ -48,6 +48,9 @@ class AuthContextProvider extends React.Component{
             if(this.props.token && this.props.isAuthenticated){
                 localStorage.setItem('token',this.props.token)
                 this.setState({isLoggedIn : true}) 
+                if(this.state.isLogin){
+                    this.props.history.push('/dashboard')
+                }  
             }else{
                 localStorage.removeItem('token')
                 this.setState({isLoggedIn : false})
@@ -55,21 +58,13 @@ class AuthContextProvider extends React.Component{
             }    
         }
 
-        if(prevState.isLogin !== this.state.isLogin){
-            console.log('login');
-            if(this.state.isLogin){
-                this.props.history.push('/dashboard')
-            }  
-        }  
-
-
     }
 
     // LOGIN
     loginHandler = (userData) => {
         // async get auth from http & dispatch state auth
         this.props.getAuthentication(userData)
-        this.setState({isLoggedIn : true,isLogin : true})
+        this.setState({isLogin : true})
     }
 
     // LOGOUT
@@ -87,11 +82,9 @@ class AuthContextProvider extends React.Component{
 
     render(){
         return <AuthContext.Provider value={{
-            isLoggedIn : this.state.isLoggedIn, 
-            validateToken : this.validateToken.bind(this) ,
+            isLoggedIn : this.state.isLoggedIn,
             logoutHandler: this.logoutHandler.bind(this), 
             loginHandler: this.loginHandler.bind(this)}}>
-
             {this.props.children}
         </AuthContext.Provider>
     }
