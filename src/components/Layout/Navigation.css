@@ -1,0 +1,52 @@
+
+.header{
+  display: flex;
+  flex-flow: row wrap;
+  justify-items: flex-start;
+  align-items: baseline;
+}
+
+.navigation{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  gap: 30px;
+}
+
+.nav-logo{
+  flex: 1;
+  font-size: 24px;
+}
+
+.nav-item{
+  list-style: none;
+}
+
+.nav-item a,.nav-logo{
+  text-decoration: none;
+}
+
+.nav-white{
+  color: #FFFFFF;
+}
+
+.nav-blue{
+  color: #2152BB;
+}
+
+
+
+@media all and (max-width: 800px) {
+  .navigation,.header {
+    /* When on medium sized screens, we center it by evenly distributing empty space around items */
+    justify-content: space-around;
+  }
+}
+
+/* Small screens */
+@media all and (max-width: 500px) {
+  .navigation,.header {
+    /* On small screens, we are no longer using row direction but column */
+    /* flex-direction: column; */
+  }
+}

@@ -1,0 +1,20 @@
+.card_blue {
+    background-color: #2152BB;
+    color: #FFFFFF;
+}
+
+.card_white{
+    background-color: #FFFFFF;
+    color: #2152BB;
+}
+
+.card{
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.card_center{
+    margin: auto;
+    height: 300px;
+    width: 500px;
+}

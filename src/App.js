@@ -1,5 +1,7 @@
-import React,{Fragment} from 'react'
+import React from 'react'
 import {Switch,Route} from 'react-router-dom'
+
+import { connect } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -12,6 +14,13 @@ import PostActionPage from './containers/PostActionPage';
 import PostDetail from './containers/PostDetail';
 import AuthContext from './context/auth-context';
 
+const mapStateToProps = state => {
+  return {
+    isWhiteBkg : state.ui.isWhiteBackground
+  }
+}
+
+
 
 class App extends React.Component{
   static contextType = AuthContext;
@@ -19,7 +28,7 @@ class App extends React.Component{
   render(){
 
     return (
-      <Fragment>
+      <div className={this.props.isWhiteBkg ? 'container' : 'container_blue'}>
         <Navigation/>
         <Switch>
           <Route path='/' exact>
@@ -36,10 +45,10 @@ class App extends React.Component{
             <NotFoundPage/>
           </Route>
         </Switch>
-      </Fragment>
+      </div>
     )
   }
 }
 
 
-export default App;
+export default connect(mapStateToProps)(App);

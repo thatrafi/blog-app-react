@@ -3,7 +3,7 @@ import React from "react";
 import {connect} from 'react-redux'
 import { withRouter } from "react-router-dom";
 import Posts from "../components/Posts/Posts";
-import Card from "../components/UI/Card";
+import { uiActions } from "../reducers/uiReducer";
 
 const mapStateToProps = state => {
     return {
@@ -11,18 +11,25 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+      setWhiteBackground : () => dispatch(uiActions.setWhiteBackground())
+    }
+}
+
 class AdminDashboard extends React.Component{
+
+    componentDidMount(){
+        this.props.setWhiteBackground()
+    }
 
     render(){
         return (
             <div className="container">
-            <Card className="p-5">
-                <h1>All Posts</h1>
                 <Posts/>
-            </Card>
-        </div>
+           </div>
         )
     }
 }
 
-export default connect(mapStateToProps)(withRouter(AdminDashboard));
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(AdminDashboard));

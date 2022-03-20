@@ -4,13 +4,60 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height:100%;
+  margin: 0;
+}
+
 html {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
-body {
-  margin: 0;
-  background-color: #3f3f3f;
+body{
+  background-color: #FFFFFF;
+  max-height: 100vh;
 }
+
+.container_blue{
+  background-color: #2152BB;
+  min-height: 100vh;
+}
+
+.flex-container-center{
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+/* .wrapper > * {
+  flex: 1 100%;
+} */
+
+
+.flex-container{
+  display: flex;
+}
+
+.wrapper-center{
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.warning_text{
+  font-weight: 700;
+  font-size: 50px;
+}
+
+
+
+
+
+
+
+
 
 
