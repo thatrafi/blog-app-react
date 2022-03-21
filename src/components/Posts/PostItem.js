@@ -6,7 +6,7 @@ import { getPostById } from "../../actions/postAction";
 import { connect } from "react-redux";
 import { postActions } from "../../reducers/postReducer";
 
-import classes from "../UI/Card.module.css"
+import "../UI/Card.scss"
 
 // initPostById : (id) => dispatch(getPostById(id))
 
@@ -29,7 +29,7 @@ class PostItem extends React.Component{
 
     render(){
         return (
-            <Card className={`w-100 my-2 ${classes.card_blue}`}>
+            <Card className={`w-100 my-2 card_blue`}>
                 <div className="card-body">
                     <h5 className="card-title">{this.props.title}</h5>
                     <h6 className="card-subtitle mb-2 text-muted">{this.props.status}</h6>

@@ -1,52 +1,130 @@
+/* Navigation */
 
-.header{
+.container_nav{
+  min-height: 100vh;
+  background-color: #2152BB;
+  overflow-y: hidden;
+}
+
+nav{
   display: flex;
+  height: 50px;
   flex-flow: row wrap;
-  justify-items: flex-start;
-  align-items: baseline;
+  justify-content: space-around;
+  background-color: #FFFFFF;
+  align-items: center;
 }
 
-.navigation{
+nav ul{
   display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-end;
-  gap: 30px;
-}
-
-.nav-logo{
-  flex: 1;
-  font-size: 24px;
-}
-
-.nav-item{
   list-style: none;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
 }
 
-.nav-item a,.nav-logo{
+nav ul li a {
+  text-decoration: none;
+  font-size: 0.8em;
+}
+
+nav .logo{
+  font-size: 24px;
   text-decoration: none;
 }
 
 .nav-white{
-  color: #FFFFFF;
+  color: black;
 }
 
 .nav-blue{
   color: #2152BB;
 }
 
+/* Hamburger Menu Style */
+
+.menu-toggle{
+  display: none;
+  flex-flow: column wrap;
+  height: 20px;
+  justify-content: space-between;
+  position: relative;
+}
+
+.menu-toggle input{
+  position: absolute;
+  width: 40px;
+  height: 28px;
+  opacity: 0;
+  left: -6px;
+  top: -3px;
+  cursor: pointer;
+}
+
+.menu-toggle span{
+  display: block;
+  width: 28px;
+  height: 3px;
+  background-color: #2152BB;
+  border-radius: 3px;
+  transition: all 0.5s;
+}
+
+/* Hamburger Menu Animation */
+/* nth-child menu-toggle span
+  <input type="checkbox"/> 1. event tho it's not span but it's counted 1
+  <span></span> 2
+  <span></span> 3
+  <span></span> 4 */
+.menu-toggle span:nth-child(2){
+  transform-origin: 0 0;
+}
+/* When the check button is checked find the 2nd span sibling inside menu toggle */
+.menu-toggle input:checked ~ span:nth-child(2) {
+  /* Default x from rotate(val) only is in the middle that's why we need transform origin x 0 y 0 */
+  transform: rotate(45deg) translate(-1px,-1px);
+}
+
+.menu-toggle span:last-child{
+  transform-origin: 0 100%;
+}
+
+.menu-toggle input:checked ~ span:last-child {
+  /* Default x from rotate(val) only is in the middle that's why we need transform origin x 0 y 0 */
+  transform: rotate(-45deg) translate(-1px,0px);
+}
+
+.menu-toggle input:checked ~ span:nth-child(3) {
+  /* Default x from rotate(val) only is in the middle that's why we need transform origin x 0 y 0 */
+  transform: scale(0);
+}
 
 
-@media all and (max-width: 800px) {
-  .navigation,.header {
-    /* When on medium sized screens, we center it by evenly distributing empty space around items */
-    justify-content: space-around;
+/* Responsiveness */
+
+/* Medium Screen */
+@media all and (max-width: 768px) {
+  nav ul{
+    width: 50%;
   }
 }
 
 /* Small screens */
-@media all and (max-width: 500px) {
-  .navigation,.header {
-    /* On small screens, we are no longer using row direction but column */
-    /* flex-direction: column; */
+@media all and (max-width: 576px) {
+  nav ul{
+    display: none;
+    /* position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    flex-flow: column wrap;
+    background-color: #2152BB;
+    overflow-y:hidden;
+    z-index: -1; */
   }
+
+  .menu-toggle{
+    display: flex;
+  }
+
 }

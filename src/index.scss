@@ -14,7 +14,7 @@ html {
 }
 
 body{
-  background-color: #FFFFFF;
+  background-color: #2152BB;
   max-height: 100vh;
 }
 
@@ -34,6 +34,10 @@ body{
   flex: 1 100%;
 } */
 
+.wrapper{
+  padding: 0 1rem;
+  height: 100%;
+}
 
 .flex-container{
   display: flex;
@@ -52,6 +56,18 @@ body{
   font-size: 50px;
 }
 
+.post_wrapper{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+@media all and (min-width: 1240px) {
+  .wrapper{
+    padding: 0 12rem;
+  }
+}
 
 
 

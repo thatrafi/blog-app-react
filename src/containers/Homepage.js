@@ -24,9 +24,7 @@ class Homepage extends React.Component{
 
     render(){
         return (
-        <div className="container_blue p-5">
             <PostsPreview/>
-        </div>
         )
     }
 }

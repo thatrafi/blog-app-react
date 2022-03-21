@@ -16,17 +16,23 @@ class Navigation extends React.Component{
     render(){
         return (
             <Fragment>
-            <header className={`header header_white`}>
-            <Link to="/" className={`nav-logo ${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`}>Blog App</Link>
-            <nav>
-                <ul className="navigation">
-                    {!this.context.isLoggedIn && <li className='nav-item'><NavLink className={`${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`} to='/'  >Home</NavLink></li>}
-                    {this.context.isLoggedIn && <li className='nav-item'><NavLink className={`${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`} to='/dashboard'  >Dashboard</NavLink></li> }
-                    {this.context.isLoggedIn && <li className='nav-item'><NavLink className={`${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`} to='/new-post'   >New Post</NavLink></li>}
-                    {!this.context.isLoggedIn && <li className='nav-item'><NavLink className={`${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`} to='/login'   >Login</NavLink></li>}
-                    {this.context.isLoggedIn && <li className='nav-item' onClick={this.logoutHandler.bind(this)}>Logout</li>}
-                </ul>
-            </nav>
+            <header>
+                <nav>
+                    <Link to="/" className={`logo ${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`}>Blog App</Link>
+                    <ul>
+                        {!this.context.isLoggedIn && <li><NavLink className={`${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`} to='/'  >Home</NavLink></li>}
+                        {this.context.isLoggedIn && <li><NavLink className={`${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`} to='/dashboard'  >Dashboard</NavLink></li> }
+                        {this.context.isLoggedIn && <li><NavLink className={`${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`} to='/new-post'   >New Post</NavLink></li>}
+                        {!this.context.isLoggedIn && <li><NavLink className={`${this.props.isWhiteBkg ? 'nav-blue' : 'nav-white'}`} to='/login'   >Login</NavLink></li>}
+                        {this.context.isLoggedIn && <li onClick={this.logoutHandler.bind(this)}><a>Logout</a></li>}
+                    </ul>
+                    <div className='menu-toggle'>
+                        <input type="checkbox"/>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </nav>
             </header>
             </Fragment>
         )

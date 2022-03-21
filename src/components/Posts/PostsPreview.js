@@ -1,8 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PostPreviewItem from "./PostPreviewItem";
 
 import {connect} from 'react-redux'
 import { getAllPosts } from "../../actions/postAction";
+
+import "./PostPreview.scss"
 
 const mapStateToProps = state => {
     return {
@@ -24,11 +26,11 @@ class PostsPreview extends React.Component{
 
     render(){
         return (
-            <Fragment>
+           <div className="post_wrapper">
                 {this.props.postsData.map((post,index) => (
-                    <PostPreviewItem key={index} id={post.id}  title={post.title} content={post.content} isPreview="true" />
+                    <PostPreviewItem key={index} id={post.id} className={(index===0) ? 'post_big' : 'post_small'} title={post.title} content={post.content} isPreview="true" />
                 ))}
-            </Fragment>
+            </div>
             
         )
     }

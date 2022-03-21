@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {Switch,Route} from 'react-router-dom'
 
 import { connect } from 'react-redux';
@@ -26,26 +26,29 @@ class App extends React.Component{
   static contextType = AuthContext;
   
   render(){
-
+// {this.props.isWhiteBkg ? 'container' : 'container_blue'}
     return (
-      <div className={this.props.isWhiteBkg ? 'container' : 'container_blue'}>
+      <Fragment>
         <Navigation/>
-        <Switch>
-          <Route path='/' exact>
-            <Homepage/>
-          </Route>
-          <Route path='/login' >
-            <LoginPage/>
-          </Route>
-          <Route path='/new-post' >{this.context.isLoggedIn && <PostActionPage/>}</Route>
-          <Route path='/edit-post/:postId' exact>{this.context.isLoggedIn && <PostActionPage/>}</Route> 
-          <Route path='/dashboard'>{this.context.isLoggedIn &&  <AdminDashboard />}</Route>  
-          <Route path='/post/:postId' exact render={(props) => <PostDetail {...props}/> } ></Route>
-          <Route path="*" exact>
-            <NotFoundPage/>
-          </Route>
-        </Switch>
-      </div>
+        <div className="wrapper">    
+          <Switch>
+            <Route path='/' exact>
+              <Homepage/>
+            </Route>
+            <Route path='/login' >
+              <LoginPage/>
+            </Route>
+            <Route path='/new-post' >{this.context.isLoggedIn && <PostActionPage/>}</Route>
+            <Route path='/edit-post/:postId' exact>{this.context.isLoggedIn && <PostActionPage/>}</Route> 
+            <Route path='/dashboard'>{this.context.isLoggedIn &&  <AdminDashboard />}</Route>  
+            <Route path='/post/:postId' exact render={(props) => <PostDetail {...props}/> } ></Route>
+            <Route path="*" exact>
+              <NotFoundPage/>
+            </Route>
+          </Switch>
+        </div>
+      </Fragment>
+      
     )
   }
 }
