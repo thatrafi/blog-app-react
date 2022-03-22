@@ -2,7 +2,6 @@ import { authAction } from '../reducers/authReducer';
 
 export const getAuthentication = (userData) => {
 	return async (dispatch) => {
-		// you can dispatch reducer here
 		const sendRequest = async () => {
 			const response = await fetch(
 				'https://blog-app-react-fb813-default-rtdb.asia-southeast1.firebasedatabase.app/admin.json',
