@@ -1,41 +1,94 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { getAuthentication,validateByToken} from "../actions/authAction"
+import { authAction } from '../reducers/authReducer'
 
 const AuthContext = React.createContext({
-    checkAuth : (()=>{})
+    isLoggedIn : false,
+    loginHandler : ((userData)=>{}),
+    logoutHandler : (()=>{})
 })
 
 const mapStateToProps = state => {
-    return{
-        isAuth : state.auth.isAuthenticated
+    return {
+        isAuthenticated : state.auth.isAuthenticated,
+        authMessage : state.auth.authMessage,
+        token : state.auth.token
+    }
+}
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getAuthentication : (userData) =>  dispatch(getAuthentication(userData)),
+        validateToken : (token) => dispatch(validateByToken(token)),
+        logout : () => dispatch(authAction.logout())
     }
 }
 
 class AuthContextProvider extends React.Component{
 
-    checkAuth(){
-        if(!this.props.isAuth){
-            this.props.history.push('/login')
+    constructor(){
+        super()
+        this.state = {
+            isLoggedIn : false, // flag to determine if user already validate and approve
+            isLogin : false // redirect to dashboard
         }
     }
 
     componentDidMount(){
-        this.checkAuth()
+        this.validateToken();
     }
+    
 
     componentDidUpdate(prevProps,prevState){
-        if(prevProps.isAuth !== this.props.isAuth){
-            this.checkAuth()
+        if((prevProps.token !== this.props.token) && (prevProps.isAuthenticated !== this.props.isAuthenticated)){
+            if(this.props.token && this.props.isAuthenticated){
+                localStorage.setItem('token',this.props.token)
+                this.setState({isLoggedIn : true}) 
+                if(this.state.isLogin){
+                    this.props.history.push('/dashboard')
+                }  
+            }else{
+                localStorage.removeItem('token')
+                this.setState({isLoggedIn : false})
+                this.props.history.push('/')
+            }    
         }
+
     }
 
+    // LOGIN
+    loginHandler = (userData) => {
+        // async get auth from http & dispatch state auth
+        this.props.getAuthentication(userData)
+        this.setState({isLogin : true})
+    }
+
+    // LOGOUT
+    logoutHandler = () => {
+        this.props.logout() 
+    } 
+
+    validateToken = () => {
+        const token = localStorage.getItem('token')
+        // validate token
+        // if the token from the state (https) != with local
+        this.props.validateToken(token)
+    }
+
+
     render(){
-        return <AuthContext.Provider value={this.checkAuth}>
+        return <AuthContext.Provider value={{
+            isLoggedIn : this.state.isLoggedIn,
+            logoutHandler: this.logoutHandler.bind(this), 
+            loginHandler: this.loginHandler.bind(this)}}>
             {this.props.children}
         </AuthContext.Provider>
     }
 }
 
-export const AuthProvider = connect(mapStateToProps)(AuthContextProvider)
+export const AuthProvider = connect(mapStateToProps,mapDispatchToProps)(withRouter(AuthContextProvider));
 export default AuthContext

@@ -36,22 +36,7 @@ class PostActionPage extends React.Component{
         }
     }
 
-    
-
-    checkAuth(){
-        if(!this.props.isAuth){
-            this.props.history.push('/login')
-        }
-    }
-
-    componentDidMount(){
-        this.checkAuth()
-    }
-
     componentDidUpdate(prevProps,prevState){
-        if(prevProps.isAuth !== this.props.isAuth){
-            this.checkAuth()
-        }
         // if data post changed
         if(prevProps.postsData !== this.props.postsData){
             // if there is post data
