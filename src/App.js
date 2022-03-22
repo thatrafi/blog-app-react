@@ -1,57 +1,63 @@
-import React, { Fragment } from 'react'
-import {Switch,Route} from 'react-router-dom'
+import React, { Fragment } from "react";
+import { Switch, Route } from "react-router-dom";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import LoginPage from './containers/LoginPage';
-import Homepage from './containers/Homepage';
-import Navigation from './components/Layout/Navigation';
-import AdminDashboard from './containers/AdminDashboard';
-import NotFoundPage from './containers/NotFoundPage';
-import PostActionPage from './containers/PostActionPage';
-import PostDetail from './containers/PostDetail';
-import AuthContext from './context/auth-context';
+import LoginPage from "./containers/LoginPage";
+import Homepage from "./containers/Homepage";
+import Navigation from "./components/Layout/Navigation";
+import AdminDashboard from "./containers/AdminDashboard";
+import NotFoundPage from "./containers/NotFoundPage";
+import PostActionPage from "./containers/PostActionPage";
+import PostDetail from "./containers/PostDetail";
+import AuthContext from "./context/auth-context";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isWhiteBkg : state.ui.isWhiteBackground
-  }
-}
+    isWhiteBkg: state.ui.isWhiteBackground,
+  };
+};
 
-
-
-class App extends React.Component{
+class App extends React.Component {
   static contextType = AuthContext;
-  
-  render(){
-// {this.props.isWhiteBkg ? 'container' : 'container_blue'}
+
+  render() {
+    // {this.props.isWhiteBkg ? 'container' : 'container_blue'}
     return (
       <Fragment>
-        <Navigation/>
-        <div className="wrapper">    
+        <Navigation />
+        <div className="wrapper">
           <Switch>
-            <Route path='/' exact>
-              <Homepage/>
+            <Route path="/" exact>
+              <Homepage />
             </Route>
-            <Route path='/login' >
-              <LoginPage/>
+            <Route path="/login">
+              <LoginPage />
             </Route>
-            <Route path='/new-post' >{this.context.isLoggedIn && <PostActionPage/>}</Route>
-            <Route path='/edit-post/:postId' exact>{this.context.isLoggedIn && <PostActionPage/>}</Route> 
-            <Route path='/dashboard'>{this.context.isLoggedIn &&  <AdminDashboard />}</Route>  
-            <Route path='/post/:postId' exact render={(props) => <PostDetail {...props}/> } ></Route>
+            <Route path="/new-post">
+              {this.context.isLoggedIn && <PostActionPage />}
+            </Route>
+            <Route path="/edit-post/:postId" exact>
+              {this.context.isLoggedIn && <PostActionPage />}
+            </Route>
+            <Route path="/dashboard">
+              {this.context.isLoggedIn && <AdminDashboard />}
+            </Route>
+            <Route
+              path="/post/:postId"
+              exact
+              render={(props) => <PostDetail {...props} />}
+            ></Route>
             <Route path="*" exact>
-              <NotFoundPage/>
+              <NotFoundPage />
             </Route>
           </Switch>
         </div>
       </Fragment>
-      
-    )
+    );
   }
 }
-
 
 export default connect(mapStateToProps)(App);

@@ -1,35 +1,19 @@
-import React,{Fragment} from "react";
+import React from "react";
 import PostsPreview from "../components/Posts/PostsPreview";
+
+import { uiActions } from "../reducers/uiReducer";
 import { connect } from "react-redux";
-import Categories from '../containers/Categories';
 
-import { uiActions } from '../reducers/uiReducer';
-
-
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     setBlueBackground: () => dispatch(uiActions.setBlueBackground()),
-    setWhiteBackground: () => dispatch(uiActions.setWhiteBackground())
-  }
-}
+    setWhiteBackground: () => dispatch(uiActions.setWhiteBackground()),
+  };
+};
 
 class Homepage extends React.Component {
-
-  componentDidMount() {
-    this.props.setBlueBackground()
-  }
-
-  componentwillde() {
-    this.props.setWhiteBackground()
-  }
-
   render() {
-    return (
-      <Fragment>
-        <PostsPreview />
-        <Categories />
-      </Fragment>
-    )
+    return <PostsPreview />;
   }
 }
 

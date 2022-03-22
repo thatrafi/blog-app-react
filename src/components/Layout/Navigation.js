@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import "./Navigation.css";
+import "./Navigation.scss";
 import AuthContext from "../../context/auth-context";
 
 class Navigation extends React.Component {
