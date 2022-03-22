@@ -13,22 +13,6 @@ const mapStateToProps = state => {
 
 class AdminDashboard extends React.Component{
 
-    checkAuth(){
-        if(!this.props.isAuth){
-            this.props.history.push('/login')
-        }
-    }
-
-    componentDidMount(){
-        this.checkAuth()
-    }
-
-    componentDidUpdate(prevProps,prevState){
-        if(prevProps.isAuth !== this.props.isAuth){
-            this.checkAuth()
-        }
-    }
-
     render(){
         return (
             <div className="container">
