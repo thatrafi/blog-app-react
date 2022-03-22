@@ -6,27 +6,27 @@ import { uiActions } from '../reducers/uiReducer';
 
 
 const mapDispatchToProps = dispatch => {
-    return {
-      setBlueBackground : () => dispatch(uiActions.setBlueBackground()),
-      setWhiteBackground : () => dispatch(uiActions.setWhiteBackground())
-    }
+  return {
+    setBlueBackground: () => dispatch(uiActions.setBlueBackground()),
+    setWhiteBackground: () => dispatch(uiActions.setWhiteBackground())
   }
-
-class Homepage extends React.Component{
-
-    componentDidMount(){
-        this.props.setBlueBackground()
-      }
-
-    componentwillde(){
-        this.props.setWhiteBackground()
-    }
-
-    render(){
-        return (
-            <PostsPreview/>
-        )
-    }
 }
 
-export default connect(null,mapDispatchToProps)(Homepage);
+class Homepage extends React.Component {
+
+  componentDidMount() {
+    this.props.setBlueBackground()
+  }
+
+  componentwillde() {
+    this.props.setWhiteBackground()
+  }
+
+  render() {
+    return (
+      <PostsPreview />
+    )
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Homepage);
