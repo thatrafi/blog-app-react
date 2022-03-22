@@ -1,6 +1,7 @@
-import React from "react";
+import React,{Fragment} from "react";
 import PostsPreview from "../components/Posts/PostsPreview";
 import { connect } from "react-redux";
+import Categories from '../containers/Categories';
 
 import { uiActions } from '../reducers/uiReducer';
 
@@ -24,7 +25,10 @@ class Homepage extends React.Component {
 
   render() {
     return (
-      <PostsPreview />
+      <Fragment>
+        <PostsPreview />
+        <Categories />
+      </Fragment>
     )
   }
 }
