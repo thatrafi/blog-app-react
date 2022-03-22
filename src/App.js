@@ -10,10 +10,14 @@ import AdminDashboard from './containers/AdminDashboard';
 import NotFoundPage from './containers/NotFoundPage';
 import PostActionPage from './containers/PostActionPage';
 import PostDetail from './containers/PostDetail';
+import AuthContext from './context/auth-context';
 
 
 class App extends React.Component{
+  static contextType = AuthContext;
+  
   render(){
+
     return (
       <Fragment>
         <Navigation/>
@@ -24,14 +28,10 @@ class App extends React.Component{
           <Route path='/login' >
             <LoginPage/>
           </Route>
-          <Route path='/new-post' >
-            <PostActionPage/>
-          </Route>
-          <Route path='/edit-post/:postId' exact render={(props) => <PostActionPage {...props}/>}></Route>
+          <Route path='/new-post' >{this.context.isLoggedIn && <PostActionPage/>}</Route>
+          <Route path='/edit-post/:postId' exact>{this.context.isLoggedIn && <PostActionPage/>}</Route> 
+          <Route path='/dashboard'>{this.context.isLoggedIn &&  <AdminDashboard />}</Route>  
           <Route path='/post/:postId' exact render={(props) => <PostDetail {...props}/> } ></Route>
-          <Route path='/dashboard' > 
-            <AdminDashboard/>
-          </Route>
           <Route path="*" exact>
             <NotFoundPage/>
           </Route>

@@ -49,6 +49,7 @@ export const getPostById = (id) =>{
         try {
             const responseData = await sendRequest()
             dispatch(postActions.setPostById({data:responseData,id:id}))
+            console.log('get data by id');
         } catch (error) {
             console.log(error.message);
         }
