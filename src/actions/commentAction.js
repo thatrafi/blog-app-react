@@ -25,9 +25,10 @@ export const getCommentsByPostId = (postId) => {
           return newArr.push(responseData[item]);
         });
       }
+      const commentsById = newArr.filter((c) => c.postId === postId)
       dispatch(
         commentActions.setCommentsByPostId({
-          data: newArr.find((c) => c.postId === postId),
+          data: (commentsById === undefined) ? newArr : commentsById,
         })
       );
     } catch (error) {

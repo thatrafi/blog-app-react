@@ -11,6 +11,7 @@ const commentSlice = createSlice({
     reducers : {
         addComment(state,action){
             state.CommentsData.unshift(action.payload.data)
+            state.CommentsDataByPostId.unshift(action.payload.data)
         },
         setComments(state,action){
             state.CommentsData = action.payload.data
