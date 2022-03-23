@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+body {
+  background-color: #2152bb;
+  max-height: 100vh;
+}
+
+.container_blue {
+  background-color: #2152bb;
+  min-height: 100vh;
+}
+
+.flex-container-center {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+/* .wrapper > * {
+  flex: 1 100%;
+} */
+
+.wrapper {
+  padding: 0 1rem;
+  height: 100%;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.wrapper-center {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.warning_text {
+  font-weight: 700;
+  font-size: 50px;
+}
+
+.post_wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+@media all and (min-width: 1240px) {
+  .wrapper {
+    padding: 0 12rem;
+  }
+}

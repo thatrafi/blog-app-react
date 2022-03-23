@@ -1,40 +1,103 @@
-import React,{Fragment} from 'react'
-import { NavLink,Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { NavLink, Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import classes from './Navigation.module.css'
-import AuthContext from '../../context/auth-context';
+import "./Navigation.scss";
+import AuthContext from "../../context/auth-context";
 
-class Navigation extends React.Component{
-    static contextType = AuthContext;
+class Navigation extends React.Component {
+  static contextType = AuthContext;
 
-    logoutHandler(){
-        this.context.logoutHandler();
-    }
+  logoutHandler() {
+    this.context.logoutHandler();
+  }
 
-    render(){
-        return (
-            <Fragment>
-            <header className={classes.header}>
-            <nav className={`navbar navbar-expand-lg navbar-light bg-transparent ${classes.nav}`}>
-                <Link to="/" className={`${classes.logo} navbar-brand`}>Blog App</Link>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className='navbar-nav mr-auto'>
-                        {!this.context.isLoggedIn && <li className='nav-item'><NavLink to='/' activeClassName={classes.active}>Home</NavLink></li>}
-                        {this.context.isLoggedIn && <li className='nav-item'><NavLink to='/dashboard' activeClassName={classes.active}>Dashboard</NavLink></li> }
-                        {this.context.isLoggedIn && <li className='nav-item'><NavLink to='/new-post' activeClassName={classes.active} >New Post</NavLink></li>}
-                        {!this.context.isLoggedIn && <li className='nav-item'><NavLink to='/login' activeClassName={classes.active} >Login</NavLink></li>}
-                        {this.context.isLoggedIn && <li className='nav-item' onClick={this.logoutHandler.bind(this)}>Logout</li>}
-                    </ul>
-                </div>
-                </nav>
-            </header>
-            </Fragment>
-        )
-        
-    }
+  render() {
+    return (
+      <Fragment>
+        <header>
+          <nav>
+            <Link
+              to="/"
+              className={`logo ${
+                this.props.isWhiteBkg ? "nav-blue" : "nav-white"
+              }`}
+            >
+              Blog App
+            </Link>
+            <ul>
+              {!this.context.isLoggedIn && (
+                <li>
+                  <NavLink
+                    className={`${
+                      this.props.isWhiteBkg ? "nav-blue" : "nav-white"
+                    }`}
+                    to="/"
+                  >
+                    Home
+                  </NavLink>
+                </li>
+              )}
+              {this.context.isLoggedIn && (
+                <li>
+                  <NavLink
+                    className={`${
+                      this.props.isWhiteBkg ? "nav-blue" : "nav-white"
+                    }`}
+                    to="/dashboard"
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+              )}
+              {this.context.isLoggedIn && (
+                <li>
+                  <NavLink
+                    className={`${
+                      this.props.isWhiteBkg ? "nav-blue" : "nav-white"
+                    }`}
+                    to="/new-post"
+                  >
+                    New Post
+                  </NavLink>
+                </li>
+              )}
+              {!this.context.isLoggedIn && (
+                <li>
+                  <NavLink
+                    className={`${
+                      this.props.isWhiteBkg ? "nav-blue" : "nav-white"
+                    }`}
+                    to="/login"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+              )}
+              {this.context.isLoggedIn && (
+                <li onClick={this.logoutHandler.bind(this)}>
+                  <a>Logout</a>
+                </li>
+              )}
+            </ul>
+            <div className="menu-toggle">
+              <input type="checkbox" />
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </nav>
+        </header>
+      </Fragment>
+    );
+  }
 }
 
-export default connect()(withRouter(Navigation));
+const mapStateToProps = (state) => {
+  return {
+    isWhiteBkg: state.ui.isWhiteBackground,
+  };
+};
 
+export default connect(mapStateToProps)(withRouter(Navigation));

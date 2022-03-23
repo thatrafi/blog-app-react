@@ -1,0 +1,48 @@
+.card_blue {
+  background-color: #2152bb;
+  color: #ffffff;
+}
+
+.card_white {
+  background-color: #ffffff;
+  color: #2152bb;
+}
+
+.card {
+  border-radius: 2px;
+  display: flex;
+  box-sizing: border-box;
+  border: none;
+}
+
+.card:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 10px solid white;
+  box-sizing: border-box;
+}
+
+.card img {
+  margin: 0;
+  height: 75%;
+  width: 100%;
+}
+
+.card_body {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card_body a {
+  text-decoration: none;
+  color: black;
+}
+
+.card_center {
+  margin: auto;
+  height: 300px;
+  width: 500px;
+}

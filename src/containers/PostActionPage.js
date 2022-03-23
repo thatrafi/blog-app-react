@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import NewPostForm from '../components/Posts/NewPostForm';
-import Card from '../components/UI/Card';
 
 import { postPostData,putPostData } from '../actions/postAction';
 import { postActions } from '../reducers/postReducer';
@@ -71,13 +70,11 @@ class PostActionPage extends React.Component{
 
     render(){
         return (
-            <div className="container">
-            <Card className="p-5">
+            <div className="container p-5">
                 <h1>New Post</h1>
                 {this.props.match.params.postId ? 
                 (<NewPostForm onSubmitPost={this.submitPostHandler.bind(this)} post={this.state.thePost} />) : 
                 (<NewPostForm onSubmitPost={this.submitPostHandler.bind(this)}/>)}
-            </Card>
         </div>
         )
     }

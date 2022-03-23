@@ -1,17 +1,20 @@
-import React from 'react';
-import PostsPreview from '../components/Posts/PostsPreview';
-import Card from '../components/UI/Card';
+import React from "react";
+import PostsPreview from "../components/Posts/PostsPreview";
+
+import { uiActions } from "../reducers/uiReducer";
+import { connect } from "react-redux";
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setBlueBackground: () => dispatch(uiActions.setBlueBackground()),
+    setWhiteBackground: () => dispatch(uiActions.setWhiteBackground()),
+  };
+};
 
 class Homepage extends React.Component {
-	render() {
-		return (
-			<div className="container">
-				<Card className="p-5">
-					<PostsPreview />
-				</Card>
-			</div>
-		);
-	}
+  render() {
+    return <PostsPreview />;
+  }
 }
 
-export default Homepage;
+export default connect(null, mapDispatchToProps)(Homepage);

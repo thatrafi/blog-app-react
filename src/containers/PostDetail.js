@@ -38,7 +38,9 @@ class PostDetail extends React.Component{
     
 
     render(){
-        return this.state.isLoading ? <Loading/> : <PostPreviewItem isPreview="false" title={this.props.postData.data.title} content={this.props.postData.data.content} />
+        return <div className="container_blue flex-container-center">
+                {this.state.isLoading ? <Loading/> : <PostPreviewItem isPreview="false" title={this.props.postData.data.title} content={this.props.postData.data.content} />}
+            </div>
     }
 
 }
