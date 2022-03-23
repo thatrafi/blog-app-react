@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const noHoverStyle = {
-  "pointer-events": "none",
+  "pointerEvents": "none",
 };
 
 class PostDetail extends React.Component {
@@ -55,7 +55,7 @@ class PostDetail extends React.Component {
             />
           )}
         </div>
-        <Comments />
+        <Comments postId={this.props.match.params.postId} />
       </Fragment>
     );
   }
