@@ -14,40 +14,43 @@ export const getAuthentication = (userData) => {
         throw new Error("Getting admin data failed!");
       }
 
-      try {
-        const responseData = await sendRequest();
-        const adminData = responseData.find(
-          (u) => u.username === userData.username
-        );
-        if (adminData) {
-          if (adminData.password === userData.password) {
-            dispatch(
-              authAction.authenticate({
-                message: "Success",
-                isAuthenticated: true,
-                token: adminData.token,
-              })
-            );
-          } else {
-            dispatch(
-              authAction.authenticate({
-                message: "Wrong Password!",
-                isAuthenticated: false,
-              })
-            );
-          }
+      const data = response.json();
+      return data;
+    };
+
+    try {
+      const responseData = await sendRequest();
+      const adminData = responseData.find(
+        (u) => u.username === userData.username
+      );
+      if (adminData) {
+        if (adminData.password === userData.password) {
+          dispatch(
+            authAction.authenticate({
+              message: "Success",
+              isAuthenticated: true,
+              token: adminData.token,
+            })
+          );
         } else {
           dispatch(
             authAction.authenticate({
-              message: "No User Found",
+              message: "Wrong Password!",
               isAuthenticated: false,
             })
           );
         }
-      } catch (error) {
-        console.log(error.message);
+      } else {
+        dispatch(
+          authAction.authenticate({
+            message: "No User Found",
+            isAuthenticated: false,
+          })
+        );
       }
-    };
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
